@@ -1,8 +1,9 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyAfH88IbhfyibhFf403QiJ3pL4pkkKda1I",
-  authDomain: "react-query-pagination-demo.firebaseapp.com",
-  projectId: "react-query-pagination-demo",
-  storageBucket: "react-query-pagination-demo.appspot.com",
-  messagingSenderId: "426973295075",
-  appId: "1:426973295075:web:069d5680ba27a884fb70d6"
+  apiKey: "AIzaSyASmLWZ_68CTGBPxSxaYa_rDYrRLaKk7Vk",
+  authDomain: "test22-eb7c2.firebaseapp.com",
+  databaseURL: "https://test22-eb7c2-default-rtdb.firebaseio.com",
+  projectId: "test22-eb7c2",
+  storageBucket: "test22-eb7c2.appspot.com",
+  messagingSenderId: "220362320484",
+  appId: "1:220362320484:web:958c17bb8fdd702d690d71"
 };

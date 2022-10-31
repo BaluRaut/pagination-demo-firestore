@@ -10,8 +10,8 @@ export const useTopics = (pageKey: number, status: 'next' | 'prev' | undefined, 
   const nextPosition = position + max
 
   useEffect(() => {
-    queryClient.prefetchQuery(['topics', pageKey + 1], () => fetchTopics('next', nextPosition, max)).then(() => {
-      const nextTopics = queryClient.getQueryData(['topics', pageKey + 1]) as Topic[]
+    queryClient.prefetchQuery(['users', pageKey + 1], () => fetchTopics('next', nextPosition, max)).then(() => {
+      const nextTopics = queryClient.getQueryData(['users', pageKey + 1]) as Topic[]
       const topicsCheck = nextTopics.length !== 0
       setSearchTopics(topicsCheck)
     })
@@ -19,7 +19,7 @@ export const useTopics = (pageKey: number, status: 'next' | 'prev' | undefined, 
 
 
   const fallback: Topic[] = []
-  const { data: topics = fallback } = useQuery(['topics', pageKey], () => fetchTopics(status, position, max), {
+  const { data: topics = fallback } = useQuery(['users', pageKey], () => fetchTopics(status, position, max), {
     keepPreviousData: true,
   })
   return { topics, searchTopics }

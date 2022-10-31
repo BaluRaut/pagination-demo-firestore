@@ -8,4 +8,4 @@ const app = initializeApp(firebaseConfig)
 
 export const db = getFirestore(app)
 
-export const topicRef = collection(db, 'topics')
+export const topicRef = collection(db, 'users')

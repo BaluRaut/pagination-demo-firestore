@@ -11,9 +11,9 @@ const TableRow: FC<Props> = (props) => {
   return (
     <div className="table-row">
       <span>
-        <span>{topic.title}</span>
+        <span>{JSON.stringify(topic)}</span>
       </span>
-      <span>{topic.text}</span>
+      <span>{topic.city}</span>
     </div>
   );
 };

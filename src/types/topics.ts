@@ -1,5 +1,1 @@
-export type Topic = {
-  topicId: number
-  title: string
-  text: string
-}
+export type Topic = any;

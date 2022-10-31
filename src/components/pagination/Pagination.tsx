@@ -20,10 +20,10 @@ const Pagination: FC<Props> = (props) => {
         }}
       >
         <button disabled={page <= 1} onClick={prevClick}>
-          戻る
+       Prev
         </button>
         <button disabled={!searchTopics} onClick={nextClick}>
-          次へ
+         Next
         </button>
       </div>
     </div>

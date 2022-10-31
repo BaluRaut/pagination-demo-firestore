@@ -3,9 +3,9 @@ import { Topic } from '../types/topics'
 import { getDocs, query, limit, orderBy, startAfter, endBefore, limitToLast } from 'firebase/firestore'
 
 export const fetchTopics = async (status: 'next' | 'prev' | undefined, position: number, max: number) => {
-  const first = query(topicRef, orderBy('topicId'), limit(max))
-  const next = query(topicRef, orderBy('topicId'), limit(max), startAfter(position))
-  const prev = query(topicRef, orderBy('topicId'), limitToLast(max), endBefore(position))
+  const first = query(topicRef, orderBy('wodate'), limit(max))
+  const next = query(topicRef, orderBy('wodate'), limit(max), startAfter(position))
+  const prev = query(topicRef, orderBy('wodate'), limitToLast(max), endBefore(position))
 
   const check = status === 'next' ? next : status === undefined ? first : prev
 
