@@ -1,4 +1,5 @@
 import { FC } from "react";
+import {Button} from "@mui/material";
 
 type Props = {
   page: number;
@@ -10,21 +11,21 @@ type Props = {
 const Pagination: FC<Props> = (props) => {
   const { page, searchTopics, prevClick, nextClick } = props;
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "end", marginBottom: 20 }}>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginTop: "30px",
-          width: "60%",
+          marginTop: "2px",
+          width: "8%",
         }}
       >
-        <button disabled={page <= 1} onClick={prevClick}>
+        <Button  variant="contained" disabled={page <= 1} onClick={prevClick}>
        Prev
-        </button>
-        <button disabled={!searchTopics} onClick={nextClick}>
+        </Button>
+        <Button variant="contained" disabled={!searchTopics} variant="contained" onClick={nextClick}>
          Next
-        </button>
+        </Button>
       </div>
     </div>
   );

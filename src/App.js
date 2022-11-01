@@ -23,14 +23,36 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { forwardRef } from 'react';
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+};
+
 function App() {
-  const max = 5;
+  const max = 100;
   const [page, setPage] = useState(1);
-  const [status, setStatus] = useState<"next" | "prev" | undefined>(undefined);
-  const [position, setPosition] = useState<number>(0);
+  const [status, setStatus] = useState(undefined);
+  const [position, setPosition] = useState(0);
   const { topics, searchTopics } = useTopics(page, status, position, max);
   const defaultMaterialTheme = createTheme();
-
   const prevClick = useCallback(() => {
     setPage((page) => page - 1);
     setStatus("prev");
@@ -39,9 +61,12 @@ function App() {
 
 
   const nextClick = useCallback(() => {
+      debugger;
     setPage((page) => page + 1);
     setStatus("next");
-    setPosition(topics[max - 1].wodate);
+    if(topics[max - 1]) {
+        setPosition(topics[max - 1].wodate);
+    }
   }, [setPage, setStatus, setPosition, topics]);
   const columns = [
     {
@@ -157,27 +182,51 @@ function App() {
         "field": "link"
     }
 ];
-
+    const tableHeight =(window.innerHeight - 34 - 34 - 52 - 1) / window.innerHeight * 100;
   return (
     <>
-      <TableHeader />
-      <ThemeProvider theme={defaultMaterialTheme}>
-      {topics &&
+        <Container maxWidth maxHeight>
+            <Box sx={{ bgcolor: 'white', height: '100vh' }}>
+
+                <ThemeProvider theme={defaultMaterialTheme}>
+
+                {topics &&
                 <MaterialTable
           columns={columns}
           data={topics}
-          options={{  
-                      paging: false
+          icons={tableIcons}
+          options={{
+              actionsColumnIndex: 0,
+              search: true,
+              selection: false,
+              filtering: false,
+              headerStyle: {
+                  backgroundColor: '#01579b',
+                  color: '#FFF'
+              },
+              cellStyle: {
+                  padding: 2,
+              },
+              rowStyle: {
+                  border: "1px solid green",
+                  height: "30px",
+                  padding: "0px !important",
+              },
+                      paging: false,
+              maxBodyHeight: `${tableHeight}vh`,
+              minBodyHeight: `${tableHeight}vh`,
           }          }
           title="Demo Title"
         />}
-        </ThemeProvider>
       <Pagination
         page={page}
         searchTopics={searchTopics}
         prevClick={prevClick}
         nextClick={nextClick}
       />
+                </ThemeProvider>
+            </Box>
+        </Container>
     </>
   );
 }

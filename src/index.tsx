@@ -1,11 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
+import {Login} from "./components/Login";
+import {HomeContainer} from "./components/HomeContainer";
+import {DataEntrtyContainer} from './components/DataEntryContainer'
+import {
+    createBrowserRouter,
+    RouterProvider,
+    Route,
+    Link,
+} from "react-router-dom";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -17,12 +24,25 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Login/>,
+    },
+    {
+        path: "/dashboard",
+        element: <HomeContainer/>,
+    },
+    {
+        path: "/data-entry",
+        element: <DataEntrtyContainer/>,
+    },
+]);
 root.render(
   <QueryClientProvider client={queryClient}>
     {/* <React.StrictMode> */}
-    <App />
-    {/* </React.StrictMode> */}
-    <ReactQueryDevtools initialIsOpen={false} />
+      <RouterProvider router={router} />
+      {/* </React.StrictMode> */}
   </QueryClientProvider>
 );
 
